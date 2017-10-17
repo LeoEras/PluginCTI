@@ -32,7 +32,8 @@ class CustomDialog extends JDialog
      */
     public CustomDialog(Frame aFrame, String aWord) {
         super(aFrame, true);
-        setLocation(aFrame.getWidth()/2, aFrame.getHeight()/2);
+        //System.out.println(aFrame);
+        //setLocation(aFrame.getWidth()/2, aFrame.getHeight()/2);
 
         magicWord = aWord.toUpperCase();
         setTitle("Información");
@@ -61,6 +62,9 @@ class CustomDialog extends JDialog
         //Handle window closing correctly.
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
+        //setLocation(optionPane.getParent().getParent().getWidth()/2, optionPane.getParent().getHeight()/2);
+        setLocation(500,300);
+
         //Ensure the text field always gets the first focus.
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -73,7 +77,8 @@ class CustomDialog extends JDialog
         textField.addActionListener(this);
 
         //Register an event handler that reacts to option pane state changes.
-        optionPane.addPropertyChangeListener(this);
+        //optionPane.addPropertyChangeListener(this);
+        optionPane.addPropertyChangeListener("value", this);
         pack();
     }
 
