@@ -1,0 +1,52 @@
+<idea-plugin>
+  <id>com.cti.ide.intellij</id>
+  <name>Plugin CTI</name>
+  <version>1.1</version>
+  <vendor url="leonardo.eras@cti.espol.edu.ec">Leonardo Eras</vendor>
+
+  <description>
+      <!--
+      <![CDATA[
+      Enter short description for your plugin here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+    -->
+    </description>
+
+  <change-notes>
+      <!--
+      <![CDATA[
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+      -->
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="145.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+
+  <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity implementation="pluginPackage.StartUpActions"></postStartupActivity>
+    </extensions>
+
+
+ <actions>
+ </actions>
+
+  <application-components>
+     
+  </application-components>
+
+    <project-components>
+        <component>
+            <implementation-class>pluginPackage.NewActionsForPlayButton</implementation-class>
+            <loadForDefaultProject>false</loadForDefaultProject>
+        </component>
+    </project-components>
+
+</idea-plugin>
