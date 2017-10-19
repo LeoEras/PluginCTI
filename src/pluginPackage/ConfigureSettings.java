@@ -57,13 +57,13 @@ public class ConfigureSettings {
             logPath = projectPath + "\\" + "log.log";
             userPath = folderPath + "\\" + "user.log";
         }else{
-            //System.out.println("Es un Unix/Linux");
+            //System.out.println("Es un Unix/Linux");dexn
             folderPath = project.getBasePath() + "/.idea/" + StartUpActions.matricula;
-            projectPath = folderPath + "\\" + project.getName();
+            projectPath = folderPath + "/" + project.getName();
             consoleOutputPath = "/.idea/" + consoleOutputFile;
-            workspacePath = "\\.idea\\workspace.xml";
-            logPath = projectPath + "\\" + "log.log";
-            userPath = folderPath + "\\" + "user.log";
+            workspacePath = "/.idea/" + "/" + "workspace.xml";
+            logPath = projectPath + "/" + "log.log";
+            userPath = folderPath + "/" + "user.log";
         }
     }
 
