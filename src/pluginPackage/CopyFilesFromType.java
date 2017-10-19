@@ -1,55 +1,80 @@
 package pluginPackage;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import org.apache.commons.lang.ArrayUtils;
+
+import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 public class CopyFilesFromType
 {
+    public String[] foldersWithoutCopy = {".idea","out"};
+    public DateFormat df = new SimpleDateFormat("dd,MM,yy,HH,mm,ss");
+    public Date dateobj = new Date();
+
     public static void main(String[] args){
-        /*new CopyFilesFromType().copy("py", "C:\\Users\\leonardo.eras\\IdeaProjects\\BBB",
-                "C:\\Users\\leonardo.eras\\IdeaProjects\\BBB\\.idea\\000000000\\BBB");*/
     }
 
     private FileTypeOrFolderFilter filter = null;
 
-    public void copy(final String fileType, String fromPath, String outputPath){
+    public Date copy(final String fileType, String fromPath, String outputPath){
         filter = new FileTypeOrFolderFilter(fileType);
         File currentFolder = new File(fromPath);
         File outputFolder = new File(outputPath);
+        dateobj = new Date();
         scanFolder(fileType, currentFolder, outputFolder);
+        copyFilesFromFolders(fileType, currentFolder, outputFolder);
+        return dateobj;
+    }
+
+    public boolean compareItems(String a, String[] b) {
+        boolean bandera = false;
+        for (int i = 0; i < b.length; i++) {
+            if (b[i].equalsIgnoreCase(a))
+                bandera = true;
+        }
+        return bandera;
+    }
+
+    private void copyFilesFromFolders(final String fileType, File currentFolder, File outputFolder) {
+        try{
+            String[] directories = currentFolder.list(new FilenameFilter() {
+                @Override
+                public boolean accept(File current, String name) {
+                    if(new File(current, name).isDirectory())
+                        return !compareItems(name, foldersWithoutCopy);
+                    else
+                        return false;
+                }
+            });
+            if (!ArrayUtils.isEmpty(directories)){
+                //System.out.println("directories:" +Arrays.toString(directories));
+                for (int j = 0; j < directories.length; j++) {
+                    scanFolder(fileType, new File(currentFolder, directories[j]), outputFolder);
+                }
+            }
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void scanFolder(final String fileType, File currentFolder, File outputFolder){
-        //System.out.println("Scanning folder [" + currentFolder + "]...");
         File[] files = currentFolder.listFiles(filter);
         for (File file : files) {
-            /*if (file.isDirectory()) {
-                //scanFolder(fileType, file, outputFolder);
-            } else {
-                copy(file, outputFolder);
-            }*/
             if (!file.isDirectory()) {
-                copy(file, outputFolder);
+                copy(file, currentFolder.getName(), outputFolder);
             }
         }
     }
 
-    private void copy(File file, File outputFolder)
+    private void copy(File file, String currentFolderName, File outputFolder)
     {
-        DateFormat df = new SimpleDateFormat("dd,MM,yy,HH,mm,ss");
-        Date dateobj = new Date();
         try {
-            //System.out.println("\tCopying [" + file + "] to folder [" + outputFolder + "]...");
             InputStream input = new FileInputStream(file);
             OutputStream out = new FileOutputStream(new File(outputFolder + File.separator +
-                    df.format(dateobj) + "_" + Depurate(file.getName()) + ".py"));
+                    currentFolderName + "_date" + df.format(dateobj) + "_" + Depurate(file.getName()) + ".py"));
             byte data[] = new byte[input.available()];
             input.read(data);
             out.write(data);

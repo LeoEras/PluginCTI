@@ -31,12 +31,11 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                 if (profile instanceof ApplicationConfiguration) {
 
                 }*/
-                String path = StartUpActions.npath;
+                //String path = StartUpActions.npath;
                 UsernamePasswordCredentialsProvider credentials = new UsernamePasswordCredentialsProvider( "est_espol", "gPw19KX3_" );
-                String logpath = path + "\\" + project.getName() + "\\" + "log.log";
 
                 //Configurando workspace
-                ConfigureWorkspaceFile workspaceFile = new ConfigureWorkspaceFile();
+                ConfigureSettings workspaceFile = new ConfigureSettings(project);
                 File outputFile = new File(project.getBasePath() + workspaceFile.consoleOutputPath);
                 //workspaceFile.createFile(outputFile);
                 workspaceFile.readXML(project);
@@ -46,26 +45,26 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                 Git git;
 
                 try {
-                    localRepo = new FileRepository(path + "/.git");
+                    localRepo = new FileRepository(workspaceFile.folderPath + "/.git");
                 } catch (java.io.IOException err){
                     err.printStackTrace();
                 }
                 git = new Git(localRepo);
                 DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-                Date dateobj = new Date();
                 workspaceFile.readXML(project);
+                CopyFilesFromType copyFiles = new CopyFilesFromType();
+                Date dateobj = copyFiles.copy("py", project.getBasePath(), workspaceFile.projectPath);
 
                 try {
                     Thread.sleep(3000);
-                    File log = new File(logpath);
+                    File log = new File(workspaceFile.logPath);
                     BufferedReader br = null;
                     FileReader fr = null;
 
                     //Punteros para escribir en archivo log.log, para no sobreescribir se pone append: true
-                    FileWriter fileWriter = new FileWriter(logpath, true);
+                    FileWriter fileWriter = new FileWriter(workspaceFile.logPath, true);
                     PrintWriter printWriter = new PrintWriter(fileWriter);
-
-                    printWriter.print("\n" + df.format(dateobj) + "\t");
+                    printWriter.print("<log_project id ='"+ copyFiles.df.format(dateobj) +"' date ='" + df.format(dateobj) + "' name ='" + project.getName() + "'>\n");
                     fr = new FileReader(project.getBasePath() + workspaceFile.consoleOutputPath);
                     br = new BufferedReader(fr);
 
@@ -74,29 +73,27 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                     while ((sCurrentLine = br.readLine()) != null) {
                         printWriter.print(sCurrentLine + "\n");
                     }
-
+                    printWriter.print("</log_project>\n");
                     printWriter.close();
 
                 } catch (IOException | InterruptedException ex) {
                     ex.printStackTrace();
                 }
 
-                new CopyFilesFromType().copy("py", project.getBasePath(), path + "\\" + project.getName());
-
                 //Git checkout indica al branch al cual se realizará el push
                 try {
-                    git.checkout().setName(StartUpActions.matr).call();
+                    git.checkout().setName(StartUpActions.matricula).call();
                     git.add().addFilepattern(".").call();
                     git.commit().setMessage("Nuevo commit, fecha: " + dateobj.toString()).call();
                 } catch (Exception ex){
                     //ex.printStackTrace();
-                    System.out.println("Referencia " + StartUpActions.matr + " no existe en remote");
+                    System.out.println("Referencia " + StartUpActions.matricula + " no existe en remote");
                 }
 
                 //Por si no existe en remote el branch, se debe de crear. En caso de existir, imprime el error
                 try {
                     CreateBranchCommand bcc = git.branchCreate();
-                    bcc.setName(StartUpActions.matr)
+                    bcc.setName(StartUpActions.matricula)
                             .setUpstreamMode(CreateBranchCommand.SetupUpstreamMode.SET_UPSTREAM)
                             .setStartPoint("origin/master")
                             .setForce(false)
@@ -110,7 +107,7 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                 try {
                     PushCommand pushCommand = git.push();
                     pushCommand.setRemote("origin");
-                    pushCommand.setRefSpecs( new RefSpec(StartUpActions.matr) );
+                    pushCommand.setRefSpecs( new RefSpec(StartUpActions.matricula) );
                     pushCommand.setCredentialsProvider(credentials);
                     pushCommand.call();
                     git.close();

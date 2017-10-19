@@ -17,9 +17,55 @@ import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.IOException;
 
-public class ConfigureWorkspaceFile {
+public class ConfigureSettings {
     public String consoleOutputFile = "output.txt";
-    public String consoleOutputPath = "/.idea/" + consoleOutputFile;
+    public String consoleOutputPath = "";
+    public String workspacePath = "";
+    public String logPath = "";
+    public String userPath = "";
+    public String folderPath = "";
+    public String projectPath = "";
+    public static String OS = System.getProperty("os.name").toLowerCase();
+
+    public static boolean isWindows() {
+        return (OS.indexOf("win") >= 0);
+    }
+
+    public static boolean isMac() {
+        return (OS.indexOf("mac") >= 0);
+    }
+
+    public ConfigureSettings(Project project){
+        setOutputPath(project);
+    }
+
+    public void setOutputPath(Project project){
+        if (isWindows()) {
+            //System.out.println("Es un Windows");
+            folderPath = project.getBasePath() + "/.idea/" + StartUpActions.matricula;
+            projectPath = folderPath + "\\" + project.getName();
+            consoleOutputPath = "/.idea/" + consoleOutputFile;
+            workspacePath = "\\.idea\\workspace.xml";
+            logPath = projectPath + "\\" + "log.log";
+            userPath = folderPath + "\\" + "user.log";
+        } else if (isMac()) {
+            //System.out.println("Es un Mac");
+            folderPath = project.getBasePath() + "/.idea/" + StartUpActions.matricula;
+            projectPath = folderPath + "\\" + project.getName();
+            consoleOutputPath = "/.idea/" + consoleOutputFile;
+            workspacePath = "\\.idea\\workspace.xml";
+            logPath = projectPath + "\\" + "log.log";
+            userPath = folderPath + "\\" + "user.log";
+        }else{
+            //System.out.println("Es un Unix/Linux");
+            folderPath = project.getBasePath() + "/.idea/" + StartUpActions.matricula;
+            projectPath = folderPath + "\\" + project.getName();
+            consoleOutputPath = "/.idea/" + consoleOutputFile;
+            workspacePath = "\\.idea\\workspace.xml";
+            logPath = projectPath + "\\" + "log.log";
+            userPath = folderPath + "\\" + "user.log";
+        }
+    }
 
     public void createFile(File newFile){
         if(!newFile.exists()){
@@ -49,7 +95,7 @@ public class ConfigureWorkspaceFile {
     public void readXML(Project project) {
         try {
             String ruta = project.getBasePath();
-            String xmlFile = ruta + "\\.idea\\workspace.xml";
+            String xmlFile = ruta + workspacePath; //"\\.idea\\workspace.xml";
             Boolean findNode = false;
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

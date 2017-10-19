@@ -14,31 +14,17 @@ class CustomDialog extends JDialog
 
     private String typedText = null;
     private JTextField textField;
-    private String magicWord;
     private JOptionPane optionPane;
     private String btnString1 = "Enter";
-    //private String btnString2 = "Cancel";
-
-    /**
-     * Returns null if the typed string was invalid; otherwise, returns the
-     * string as the user entered it.
-     */
-    public String getValidatedText() {
-        return typedText;
-    }
 
     /**
      * Creates the reusable dialog.
      */
-    public CustomDialog(Frame aFrame, String aWord) {
-        super(aFrame, true);
-        //System.out.println(aFrame);
-        //setLocation(aFrame.getWidth()/2, aFrame.getHeight()/2);
-
-        magicWord = aWord.toUpperCase();
+    public CustomDialog() {
         setTitle("Información");
 
         textField = new JTextField(10);
+        new SizeFilter(textField, 9);
 
         //Create an array of the text and components to be displayed.
         String msgString1 = "Ingrese su número de matrícula o cédula (9 dígitos): ";
@@ -117,9 +103,8 @@ class CustomDialog extends JDialog
 
             if (btnString1.equals(value)) {
                 typedText = textField.getText();
-                String ucText = typedText.toUpperCase();
-                if (magicWord.equals(ucText)) {
-                    //JOptionPane.showMessageDialog(this, "Correct answer given");
+                if (typedText.matches("\\d*") && typedText.length() == 9) {
+                    StartUpActions.matricula = typedText;
                     exit();
                 } else {
                     //text was invalid
@@ -133,13 +118,6 @@ class CustomDialog extends JDialog
                     textField.requestFocusInWindow();
                 }
             }
-            /*else { //user closed dialog or clicked cancel
-                JOptionPane.showMessageDialog(this, "It's OK.  "
-                        + "We won't force you to type "
-                        + magicWord + ".");
-                typedText = null;
-                exit();
-            }*/
         }
     }
 
@@ -155,8 +133,12 @@ class CustomDialog extends JDialog
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new CustomDialog(null, "AAA").setVisible(true);
+                new CustomDialog().setVisible(true);
             }
         });
+    }
+
+    public String getText() {
+        return textField.getText();
     }
 }

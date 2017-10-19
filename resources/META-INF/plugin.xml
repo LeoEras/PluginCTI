@@ -36,6 +36,9 @@
 
 
  <actions>
+     <action id="pluginPackage.UpdateWorkspaceFile" class="pluginPackage.UpdateWorkspaceFile" text="Update">
+         <add-to-group group-id="RunnerActions" anchor="first"/>
+     </action>
  </actions>
 
   <application-components>
