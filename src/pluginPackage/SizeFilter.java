@@ -1,7 +1,11 @@
 package pluginPackage;
 
+import org.codehaus.plexus.util.FileUtils;
+
 import javax.swing.*;
 import javax.swing.text.*;
+import java.io.File;
+import java.io.IOException;
 
 public class SizeFilter extends JPanel{
     //JTextField textfield = new JTextField(10);
@@ -67,10 +71,12 @@ public class SizeFilter extends JPanel{
     }
 
     public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //createAndShowUI();
-            }
-        });
+        File source = new File("C:\\Users\\Norman-Laptop\\IdeaProjects\\test\\.idea\\000000025");
+        File dest = new File("C:\\Users\\Norman-Laptop\\IdeaProjects\\test\\.idea\\000000025_TMP");
+        try {
+            FileUtils.copyDirectoryStructure(source, dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

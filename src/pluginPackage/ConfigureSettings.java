@@ -25,6 +25,7 @@ public class ConfigureSettings {
     public String userPath = "";
     public String folderPath = "";
     public String projectPath = "";
+    public String tempPath = "";
     public static String OS = System.getProperty("os.name").toLowerCase();
 
     public static boolean isWindows() {
@@ -44,6 +45,7 @@ public class ConfigureSettings {
             //System.out.println("Es un Windows");
             folderPath = project.getBasePath() + "/.idea/" + StartUpActions.matricula;
             projectPath = folderPath + "\\" + project.getName();
+            tempPath = project.getBasePath() + "/.idea/" + StartUpActions.matricula + "_TMP";
             consoleOutputPath = "/.idea/" + consoleOutputFile;
             workspacePath = "\\.idea\\workspace.xml";
             logPath = projectPath + "\\" + "log.log";
@@ -52,6 +54,7 @@ public class ConfigureSettings {
             //System.out.println("Es un Mac");
             folderPath = project.getBasePath() + "/.idea/" + StartUpActions.matricula;
             projectPath = folderPath + "\\" + project.getName();
+            tempPath = folderPath + "\\" + project.getName() + "_TMP";
             consoleOutputPath = "/.idea/" + consoleOutputFile;
             workspacePath = "\\.idea\\workspace.xml";
             logPath = projectPath + "\\" + "log.log";
@@ -60,6 +63,7 @@ public class ConfigureSettings {
             //System.out.println("Es un Unix/Linux");dexn
             folderPath = project.getBasePath() + "/.idea/" + StartUpActions.matricula;
             projectPath = folderPath + "/" + project.getName();
+            tempPath = folderPath + "/" + project.getName() + "_TMP";
             consoleOutputPath = "/.idea/" + consoleOutputFile;
             workspacePath = "/.idea/" + "/" + "workspace.xml";
             logPath = projectPath + "/" + "log.log";
