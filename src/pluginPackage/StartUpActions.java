@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.PrivateKey;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -89,6 +88,7 @@ public class StartUpActions implements StartupActivity {
             cloneCommand.setURI(remotePath);
             cloneCommand.setCredentialsProvider(credentials);
             cloneCommand.setDirectory(new File(workspaceFile.folderPath)).call();
+            contieneGit = true;
         } catch (TransportException tr){
             conexion = false;
             System.out.println("No hay conexion");
@@ -104,7 +104,9 @@ public class StartUpActions implements StartupActivity {
                    No marcar esto genera conflictos, ya que es imposible borrar la carpeta .git mientras el programa este
                    abierto.
             */
-            contieneGit = true;
+            if(!conexion){
+                contieneGit = true;
+            }
         } catch (GitAPIException apiex){
             //apiex.printStackTrace();
             System.out.println("Error general de JGit.");
@@ -112,13 +114,12 @@ public class StartUpActions implements StartupActivity {
 
         //Realiza pull del branch perteneciente al ID de usuario, por si 'remote' ya existe algo que 'local' no tenga.
         //Debido a que es una operacion lenta, se pregunta por la conexion antes de realizarla.
-        if (conexion){
+        if (conexion && contieneGit){
             try {
                 git.pull().setRemoteBranchName(matricula).setCredentialsProvider(credentials).call();
             } catch (RefNotAdvertisedException a) {
                 System.out.println("Remote " + matricula + " no existe");
             } catch (GitAPIException ex){
-                //ex.printStackTrace();
                 System.out.println("Error general con JGit.");
             } finally {
                 git.close();

@@ -56,14 +56,14 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                     lscommand.setRemote(remotePath).setCredentialsProvider(credentials).call();
                 } catch (TransportException tex){
                     conexion = false;
-                    System.out.println("Se ha perdido conexion con el servidor");
+                    System.out.println("Se ha perdido conexion con el servidor.");
                 } catch (GitAPIException ex){
-                    System.out.println("Error general con JGit");
+                    System.out.println("Error general con JGit. Llamada desde LsRemoteCommand.call();.");
                 }
 
-                //Caso en el que nunca se pudo clonar del repositorio al iniciar el proyecto
+                //Si no existe un .git asociado es porque la operacion 'clone' no se pudo realizar.
                 if(!StartUpActions.contieneGit){
-                    //Copiando en carpeta temporal
+                    //Copiando datos a carpeta temporal.
                     File source = new File(workspaceFile.folderPath);
                     File dest = new File(workspaceFile.tempPath);
                     try {
@@ -72,13 +72,14 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                         e.printStackTrace();
                     }
 
-                    //Borrando contenido para intentar un git clone
+                    //Borrando contenido para intentar un git 'clone' en carpeta vacía.
                     try {
                         FileUtils.cleanDirectory(workspaceFile.folderPath);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
 
+                    //Git 'clone.'
                     try {
                         CloneCommand cloneCommand = Git.cloneRepository();
                         cloneCommand.setURI(remotePath);
@@ -86,29 +87,25 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                         cloneCommand.setDirectory(new File(workspaceFile.folderPath)).call();
                     } catch (TransportException tr){
                         conexion = false;
-                        System.out.println("No hay conexion");
-                    } catch (JGitInternalException jex){
-                        //La carpeta ya existe y tiene un .git asociado
-                        System.out.println("Esta carpeta ya contiene un .git asociado.");
-                    } catch (GitAPIException ex){
+                        System.out.println("No hay conexión.");
+                    } catch (JGitInternalException | GitAPIException ex){
+                        conexion = false;
                         System.out.println("Error general de JGit. Lanzado por CloneCommand.call();.");
                     }
 
-                    //Realiza pull del branch perteneciente al ID de usuario, por si en remote ya tiene algo que en esta
-                    //máquina no tenga. No se realiza cuando no existe conexión con el remote o con internet en general.
+                    //Realiza pull del 'branch' perteneciente al ID de usuario, por si 'remote' ya existe algo que 'local'
+                    //no tenga. Debido a que es una operación lenta, se pregunta por la conexión antes de realizarla.
                     if (conexion){
-                        //StartUpActions.conexion = true;
                         try {
                             git.pull().setRemoteBranchName(StartUpActions.matricula).setCredentialsProvider(credentials).call();
                         } catch (RefNotAdvertisedException a){
-                            System.out.println("Remote " + StartUpActions.matricula + " no existe");
+                            System.out.println("Remote " + StartUpActions.matricula + " no existe.");
                         } catch (GitAPIException ex){
-                            //ex.printStackTrace();
                             System.out.println("Error general con JGit");
                         }
                     }
 
-                    //Regresando contenido a origen
+                    //Regresando contenido a origen.
                     source = new File(workspaceFile.tempPath);
                     dest = new File(workspaceFile.folderPath);
                     try {
@@ -117,7 +114,7 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                         e.printStackTrace();
                     }
 
-                    //Borrando contenido de temporal para evitar duplicados
+                    //Borrando contenido temporal para evitar duplicados.
                     try {
                         FileUtils.deleteDirectory(workspaceFile.tempPath);
                     } catch (IOException e) {
@@ -139,13 +136,14 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                     //Punteros para escribir en archivo log.log, para no sobreescribir se pone append: true
                     FileWriter fileWriter = new FileWriter(workspaceFile.logPath, true);
                     PrintWriter printWriter = new PrintWriter(fileWriter);
-                    printWriter.print("<log_project id ='"+ copyFiles.df.format(dateobj) +"' date ='" + df.format(dateobj) + "' name ='" + project.getName() + "'>\n");
+                    printWriter.print("<log_project id ='"+ copyFiles.df.format(dateobj) +"' date ='"
+                            + df.format(dateobj) + "' name ='" + project.getName() + "'>\n");
                     fr = new FileReader(project.getBasePath() + workspaceFile.consoleOutputPath);
                     br = new BufferedReader(fr);
 
                     String sCurrentLine;
 
-                    //Copiando contenido de output.txt a log.log
+                    //Copiando contenido de output.txt a log.log.
                     while ((sCurrentLine = br.readLine()) != null) {
                         printWriter.print(sCurrentLine + "\n");
                     }
@@ -153,7 +151,7 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                     printWriter.close();
 
                 } catch (IOException | InterruptedException ex) {
-                    ex.printStackTrace();
+                    System.out.println("Error con manejo de archivos.");
                 }
 
                 //Git 'checkout', git 'add', git 'commit'... No se realiza si no hay conexion.
@@ -163,11 +161,11 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                         git.add().addFilepattern(".").call();
                         git.commit().setMessage("Nuevo commit, fecha: " + dateobj.toString()).call();
                     } catch (Exception ex){
-                        //ex.printStackTrace();
-                        System.out.println("Referencia " + StartUpActions.matricula + " no existe en remote");
+                        System.out.println("Referencia " + StartUpActions.matricula + " no existe en 'remote.'");
                     }
 
-                    //Por si no existe en remote el branch, se debe de crear. En caso de existir, imprime el error
+                    //Por si no existe en remote el branch, se debe de crear. En caso de existir, imprime el mensaje
+                    //correspondiente en consola.
                     try {
                         CreateBranchCommand bcc = git.branchCreate();
                         bcc.setName(StartUpActions.matricula)
@@ -177,7 +175,7 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                                 .call();
                     } catch(GitAPIException ex){
                         //ex.printStackTrace();
-                        System.out.println("Trabajando en branch existente.");
+                        System.out.println("Trabajando en 'branch' existente.");
                     }
 
                     //'Push' a 'remote.'
