@@ -48,7 +48,7 @@ public class ConfigureSettings {
             tempPath = project.getBasePath() + "/.idea/" + StartUpActions.matricula + "_TMP";
             consoleOutputPath = "/.idea/" + consoleOutputFile;
             workspacePath = "\\.idea\\workspace.xml";
-            logPath = projectPath + "\\" + "log.log";
+            logPath = projectPath + "\\" + "log.xml";
             userPath = folderPath + "\\" + "user.log";
         } else if (isMac()) {
             //System.out.println("Es un Mac");
@@ -57,7 +57,7 @@ public class ConfigureSettings {
             tempPath = folderPath + "\\" + project.getName() + "_TMP";
             consoleOutputPath = "/.idea/" + consoleOutputFile;
             workspacePath = "\\.idea\\workspace.xml";
-            logPath = projectPath + "\\" + "log.log";
+            logPath = projectPath + "\\" + "log.xml";
             userPath = folderPath + "\\" + "user.log";
         }else{
             //System.out.println("Es un Unix/Linux");dexn
@@ -66,7 +66,7 @@ public class ConfigureSettings {
             tempPath = folderPath + "/" + project.getName() + "_TMP";
             consoleOutputPath = "/.idea/" + consoleOutputFile;
             workspacePath = "/.idea/" + "/" + "workspace.xml";
-            logPath = projectPath + "/" + "log.log";
+            logPath = projectPath + "/" + "log.xml";
             userPath = folderPath + "/" + "user.log";
         }
     }
