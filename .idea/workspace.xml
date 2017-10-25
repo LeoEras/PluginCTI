@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f85484e1-1154-4b64-a41c-315113a9fb8b" name="Default" comment="Agregado soporte para linux">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/CustomDialog$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/CustomDialog$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/CustomDialog.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/SizeFilter$TextLengthDocFilter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/SizeFilter.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/ConfigureSettings.class" afterPath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/ConfigureSettings.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/StartUpActions.class" afterPath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/StartUpActions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pluginPackage/ConfigureSettings.java" afterPath="$PROJECT_DIR$/src/pluginPackage/ConfigureSettings.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pluginPackage/NewActionsForPlayButton.java" afterPath="$PROJECT_DIR$/src/pluginPackage/NewActionsForPlayButton.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -40,8 +31,8 @@
       <file leaf-file-name="StartUpActions.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pluginPackage/StartUpActions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state relative-caret-position="-1092">
+              <caret line="57" column="49" lean-forward="false" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -52,12 +43,12 @@
       <file leaf-file-name="NewActionsForPlayButton.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pluginPackage/NewActionsForPlayButton.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="135" column="21" lean-forward="true" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
+            <state relative-caret-position="225">
+              <caret line="183" column="56" lean-forward="true" selection-start-line="183" selection-start-column="56" selection-end-line="183" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1896#12189#0" expanded="true" />
-                <element signature="e#12188#12189#0" expanded="true" />
+                <element signature="e#1896#12329#0" expanded="true" />
+                <element signature="e#12328#12329#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -66,9 +57,11 @@
       <file leaf-file-name="ConfigureSettings.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pluginPackage/ConfigureSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1326">
-              <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="16" />
-              <folding />
+            <state relative-caret-position="153">
+              <caret line="108" column="54" lean-forward="true" selection-start-line="108" selection-start-column="54" selection-end-line="108" selection-end-column="92" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,6 +115,7 @@
       <find>no existe en</find>
       <find>log</find>
       <find>parse</find>
+      <find>fileut</find>
       <find>xml</find>
     </findStrings>
   </component>
@@ -235,6 +229,10 @@
               <item name="PluginCTI" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pluginPackage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PluginCTI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -838,16 +836,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pluginPackage/ConfigureSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1326">
-          <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="16" />
-          <folding />
+        <state relative-caret-position="153">
+          <caret line="108" column="54" lean-forward="true" selection-start-line="108" selection-start-column="54" selection-end-line="108" selection-end-column="92" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pluginPackage/StartUpActions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state relative-caret-position="-1092">
+          <caret line="57" column="49" lean-forward="false" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -856,12 +856,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pluginPackage/NewActionsForPlayButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="135" column="21" lean-forward="true" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
+        <state relative-caret-position="225">
+          <caret line="183" column="56" lean-forward="true" selection-start-line="183" selection-start-column="56" selection-end-line="183" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1896#12189#0" expanded="true" />
-            <element signature="e#12188#12189#0" expanded="true" />
+            <element signature="e#1896#12329#0" expanded="true" />
+            <element signature="e#12328#12329#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -142,14 +142,15 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                 Date dateobj = copyFiles.copy("py", project.getBasePath(), workspaceFile.projectPath);
 
                 try {
+                    File log = new File(workspaceFile.logPath);
                     Thread.sleep(3000);
                     BufferedReader br = null;
                     FileReader fr = null;
                     FileWriter fileWriter;
                     PrintWriter printWriter = null;
 
-                    if (!FileUtils.fileExists(workspaceFile.logPath)){
-                        File log = new File(workspaceFile.logPath);
+                    if (!log.exists()){
+                        log = new File(workspaceFile.logPath);
                         log.createNewFile();
 
                         fileWriter = new FileWriter(workspaceFile.logPath, true);
@@ -160,12 +161,11 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                         printWriter.close();
                     }
 
-
                     try{
                         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
                         Document doc = dBuilder.parse(workspaceFile.logPath);
-                        Element root  = doc.getDocumentElement();
+                        Element root = doc.getDocumentElement();
                         Element eNewComponent = doc.createElement("log_project");
                         eNewComponent.setAttribute("id", "" + copyFiles.df.format(dateobj));
                         eNewComponent.setAttribute("date", "" + df.format(dateobj));
@@ -180,10 +180,13 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                             eNewComponent.appendChild(doc.createTextNode("" + sCurrentLine + "\n"));
                         }
                         root.appendChild(eNewComponent);
+                        System.out.println(root);
+                        System.out.println(eNewComponent);
+
                         TransformerFactory transformerFactory = TransformerFactory.newInstance();
                         Transformer transformer = transformerFactory.newTransformer();
-                        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        //transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+                        //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                         DOMSource source = new DOMSource(doc);
                         StreamResult result = new StreamResult(new File(workspaceFile.logPath));
                         transformer.transform(source, result);
