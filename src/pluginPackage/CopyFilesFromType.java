@@ -3,6 +3,7 @@ package pluginPackage;
 import org.apache.commons.lang.ArrayUtils;
 
 import java.io.*;
+import java.net.NoRouteToHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -24,6 +25,15 @@ public class CopyFilesFromType
         File currentFolder = new File(fromPath);
         File outputFolder = new File(outputPath);
         dateobj = new Date();
+        try {
+            dateobj = GlobalTime.getAtomicTime().getTime();
+        } catch(NoRouteToHostException nrthex) {
+            System.out.println("No hay conexión con el servidor para obtener el tiempo. Tomando hora local.");
+            dateobj = new Date();
+        } catch(IOException ex) {
+            System.out.println("Tomando hora local.");
+            dateobj = new Date();
+        }
         scanFolder(fileType, currentFolder, outputFolder);
         copyFilesFromFolders(fileType, currentFolder, outputFolder);
         return dateobj;

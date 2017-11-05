@@ -141,9 +141,72 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                 CopyFilesFromType copyFiles = new CopyFilesFromType();
                 Date dateobj = copyFiles.copy("py", project.getBasePath(), workspaceFile.projectPath);
 
+                File log = new File(workspaceFile.logPath);
+                BufferedReader br = null;
+                FileWriter fw = null;
+                FileReader fr = null;
+                PrintWriter pw = null;
+
                 try {
-                    File log = new File(workspaceFile.logPath);
+                    if(!log.exists()){
+                        log = new File(workspaceFile.logPath);
+                        log.createNewFile();
+
+                        fw = new FileWriter(workspaceFile.logPath, true);
+                        pw = new PrintWriter(fw);
+                        pw.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + "\n");
+                        pw.print("<output>" + "\n");
+                        pw.print("</output>");
+                        pw.close();
+                    }
+                } catch(IOException ex) {
+                    System.out.println("Error con manejo de archivos.");
+                }
+
+                try {
                     Thread.sleep(3000);
+                } catch (InterruptedException ex){
+                    ex.printStackTrace();
+                }
+
+                try{
+                    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                    Document doc = dBuilder.parse(workspaceFile.logPath);
+                    Element root = doc.getDocumentElement();
+                    Element eNewComponent = doc.createElement("log_project");
+                    eNewComponent.setAttribute("id", "" + copyFiles.df.format(dateobj));
+                    eNewComponent.setAttribute("date", "" + df.format(dateobj));
+                    eNewComponent.setAttribute("name_project", "" + project.getName());
+
+                    fr = new FileReader(project.getBasePath() + workspaceFile.consoleOutputPath);
+                    br = new BufferedReader(fr);
+
+                    String sCurrentLine;
+                    //Copiando contenido de output.txt a log.log.
+                    while ((sCurrentLine = br.readLine()) != null) {
+                        eNewComponent.appendChild(doc.createTextNode("" + sCurrentLine + "\n"));
+                    }
+
+                    root.appendChild(eNewComponent);
+                    //System.out.println(root);
+                    //System.out.println(eNewComponent);
+                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                    Transformer transformer = transformerFactory.newTransformer();
+                    //transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+                    //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                    DOMSource source = new DOMSource(doc);
+                    StreamResult result = new StreamResult(new File(workspaceFile.logPath));
+                    transformer.transform(source, result);
+                } catch (ParserConfigurationException | SAXException | TransformerException | IOException ex){
+                    ex.printStackTrace();
+                    System.out.println(ex.getMessage());
+                }
+
+                /*
+                try {
+
+                    //Thread.sleep(3000);
                     BufferedReader br = null;
                     FileReader fr = null;
                     FileWriter fileWriter;
@@ -204,7 +267,7 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                 } catch (IOException | InterruptedException | NullPointerException ex) {
                     ex.printStackTrace();
                     System.out.println("Error con manejo de archivos.");
-                }
+                }*/
 
                 //Git 'checkout', git 'add', git 'commit'... No se realiza si no hay conexion.
                 if (conexion){
