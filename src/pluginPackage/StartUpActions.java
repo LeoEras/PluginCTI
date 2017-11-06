@@ -9,9 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.CloneCommand;
@@ -100,19 +98,17 @@ public class StartUpActions implements StartupActivity {
                 System.out.println("No hay conexion");
             } catch (JGitInternalException ie){
                 System.out.println("Esta carpeta ya contiene un .git asociado");
-            /*Cuando se tiene un .git asociado con la carpeta, JGit ignora 'TransportException'. Debido a la prueba de
-            conexion anterior a la operacion 'clone', se tienen los siguientes casos:
-                1. Hay conexion y existe un .git asociado a la carpeta: Se puede ignorar la operacion de 'clone.' Este
-                   es el caso en que vuelva a trabajar el mismo estudiante con el mismo proyecto.
-                2. No hay conexion y existe un .git asociado de forma previa: Ya que la operacion 'pull' es lenta, se
-                   prefiere no realizarla. Es necesario ademas notificar a la clase 'NewActionsForPlayButton' que ya hay
-                   un .git asociado. De esta forma se evita realizar la operacion 'clone' durante 'Run.'
-                   No marcar esto genera conflictos, ya que es imposible borrar la carpeta .git mientras el programa este
-                   abierto.
-            */
-                if(!conexion){
-                    contieneGit = true;
-                }
+                /*Cuando se tiene un .git asociado con la carpeta, JGit ignora 'TransportException'. Debido a la prueba de
+                conexion anterior a la operacion 'clone', se tienen los siguientes casos:
+                    1. Hay conexion y existe un .git asociado a la carpeta: Se puede ignorar la operacion de 'clone.' Este
+                       es el caso en que vuelva a trabajar el mismo estudiante con el mismo proyecto.
+                    2. No hay conexion y existe un .git asociado de forma previa: Ya que la operacion 'pull' es lenta, se
+                       prefiere no realizarla. Es necesario ademas notificar a la clase 'NewActionsForPlayButton' que ya hay
+                       un .git asociado. De esta forma se evita realizar la operacion 'clone' durante 'Run.'
+                       No marcar esto genera conflictos, ya que es imposible borrar la carpeta .git mientras el programa este
+                       abierto.
+                */
+                contieneGit = true;
             } catch (GitAPIException apiex){
                 //apiex.printStackTrace();
                 System.out.println("Error general de JGit.");

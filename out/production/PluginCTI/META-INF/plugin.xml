@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>com.cti.ide.intellij</id>
   <name>Plugin CTI</name>
-  <version>1.1</version>
+  <version>1.6.12</version>
   <vendor url="leonardo.eras@cti.espol.edu.ec">Leonardo Eras</vendor>
 
   <description>

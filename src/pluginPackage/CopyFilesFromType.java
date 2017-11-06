@@ -41,8 +41,8 @@ public class CopyFilesFromType
                     copyFilesFromFolders(projectPath, f.getAbsolutePath(), fileType, outputFolder);
                 } else {
                     if(f.getAbsoluteFile().getName().endsWith("." + fileType)) {
-                        String projectAbsolutePath = projectPath.toLowerCase().replace("_","").replace("\\","_").replace("/","_").replaceAll("[.:!?(){}\\\\-]","");
-                        String actualPath = f.getParent().toLowerCase().replace("_","").replace("\\","_").replace("/","_").replaceAll("[.:!?(){}\\\\-]","");
+                        String projectAbsolutePath = projectPath.toLowerCase().replace("_","").replace("\\","_").replace("/","_").replaceAll("[.:!?(){}\\[\\]\\\\-]","");
+                        String actualPath = f.getParent().toLowerCase().replace("_","").replace("\\","_").replace("/","_").replaceAll("[.:!?(){}\\[\\]\\\\-]","");
                         String source = actualPath.replace(projectAbsolutePath,"");
                         copy(f, source, outputFolder);
                     }

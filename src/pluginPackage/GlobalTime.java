@@ -87,7 +87,7 @@ public final class GlobalTime {
         Calendar c = Calendar.getInstance();
         c.setTime(time);
 
-        if(c.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY){
+        if(c.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY){
             try{
                 Date now = sdf.parse(sdf.format(time));
                 Date dstart = sdf.parse(startTime);
