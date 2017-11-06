@@ -19,14 +19,11 @@ import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -45,183 +42,131 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
         project.getMessageBus().connect().subscribe(ExecutionManager.EXECUTION_TOPIC, new ExecutionListener() {
             @Override
             public void processTerminated(@NotNull String executorId, @NotNull ExecutionEnvironment env, @NotNull ProcessHandler handler, int exitCode) {
-                Boolean conexion = true;
-                UsernamePasswordCredentialsProvider credentials = new UsernamePasswordCredentialsProvider( "est_espol", "gPw19KX3_" );
+                boolean workday = GlobalTime.isWorkingTime("10:15:00", "11:45:00");
+                boolean conexion = true;
 
-                //Configurando workspace
-                ConfigureSettings workspaceFile = new ConfigureSettings(project);
-                File outputFile = new File(project.getBasePath() + workspaceFile.consoleOutputPath);
-                workspaceFile.readXML(project);
+                if(workday){
+                    UsernamePasswordCredentialsProvider credentials = new UsernamePasswordCredentialsProvider( "est_espol", "gPw19KX3_" );
 
-                //Inicializa las variables para control de repositorio
-                Repository localRepo = null;
-                Git git;
+                    //Configurando workspace
+                    ConfigureSettings workspaceFile = new ConfigureSettings(project);
+                    File outputFile = new File(project.getBasePath() + workspaceFile.consoleOutputPath);
+                    workspaceFile.readXML(project);
 
-                try {
-                    localRepo = new FileRepository(workspaceFile.folderPath + "/.git");
-                } catch (java.io.IOException err){
-                    err.printStackTrace();
-                }
-                git = new Git(localRepo);
+                    //Inicializa las variables para control de repositorio
+                    Repository localRepo = null;
+                    Git git;
 
-                //Prueba de conexion con servidor
-                try{
-                    LsRemoteCommand lscommand = git.lsRemote();
-                    lscommand.setRemote(remotePath).setCredentialsProvider(credentials).call();
-                } catch (TransportException tex){
-                    conexion = false;
-                    System.out.println("Se ha perdido conexion con el servidor.");
-                } catch (GitAPIException ex){
-                    System.out.println("Error general con JGit. Llamada desde LsRemoteCommand.call();.");
-                }
-
-                //Si no existe un .git asociado es porque la operacion 'clone' no se pudo realizar.
-                if(!StartUpActions.contieneGit){
-                    //Copiando datos a carpeta temporal.
-                    File source = new File(workspaceFile.folderPath);
-                    File dest = new File(workspaceFile.tempPath);
                     try {
-                        FileUtils.copyDirectoryStructure(source, dest);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        localRepo = new FileRepository(workspaceFile.folderPath + "/.git");
+                    } catch (java.io.IOException err){
+                        err.printStackTrace();
                     }
+                    git = new Git(localRepo);
 
-                    //Borrando contenido para intentar un git 'clone' en carpeta vacía.
-                    try {
-                        FileUtils.cleanDirectory(workspaceFile.folderPath);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    //Git 'clone.'
-                    try {
-                        CloneCommand cloneCommand = Git.cloneRepository();
-                        cloneCommand.setURI(remotePath);
-                        cloneCommand.setCredentialsProvider(credentials);
-                        cloneCommand.setDirectory(new File(workspaceFile.folderPath)).call();
-                    } catch (TransportException tr){
+                    //Prueba de conexion con servidor
+                    try{
+                        LsRemoteCommand lscommand = git.lsRemote();
+                        lscommand.setRemote(remotePath).setCredentialsProvider(credentials).call();
+                    } catch (TransportException tex){
                         conexion = false;
-                        System.out.println("No hay conexión.");
-                    } catch (JGitInternalException | GitAPIException ex){
-                        conexion = false;
-                        System.out.println("Error general de JGit. Lanzado por CloneCommand.call();.");
+                        System.out.println("Se ha perdido conexion con el servidor.");
+                    } catch (GitAPIException ex){
+                        System.out.println("Error general con JGit. Llamada desde LsRemoteCommand.call();.");
                     }
 
-                    //Realiza pull del 'branch' perteneciente al ID de usuario, por si 'remote' ya existe algo que 'local'
-                    //no tenga. Debido a que es una operación lenta, se pregunta por la conexión antes de realizarla.
-                    if (conexion){
+                    //Si no existe un .git asociado es porque la operacion 'clone' no se pudo realizar.
+                    if(!StartUpActions.contieneGit){
+                        //Copiando datos a carpeta temporal.
+                        File source = new File(workspaceFile.folderPath);
+                        File dest = new File(workspaceFile.tempPath);
                         try {
-                            git.pull().setRemoteBranchName(StartUpActions.matricula).setCredentialsProvider(credentials).call();
-                        } catch (RefNotAdvertisedException a){
-                            System.out.println("Remote " + StartUpActions.matricula + " no existe.");
-                        } catch (GitAPIException ex){
-                            System.out.println("Error general con JGit");
+                            FileUtils.copyDirectoryStructure(source, dest);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        //Borrando contenido para intentar un git 'clone' en carpeta vacía.
+                        try {
+                            FileUtils.cleanDirectory(workspaceFile.folderPath);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        //Git 'clone.'
+                        try {
+                            CloneCommand cloneCommand = Git.cloneRepository();
+                            cloneCommand.setURI(remotePath);
+                            cloneCommand.setCredentialsProvider(credentials);
+                            cloneCommand.setDirectory(new File(workspaceFile.folderPath)).call();
+                        } catch (TransportException tr){
+                            conexion = false;
+                            System.out.println("No hay conexión.");
+                        } catch (JGitInternalException | GitAPIException ex){
+                            conexion = false;
+                            System.out.println("Error general de JGit. Lanzado por CloneCommand.call();.");
+                        }
+
+                        //Realiza pull del 'branch' perteneciente al ID de usuario, por si 'remote' ya existe algo que 'local'
+                        //no tenga. Debido a que es una operación lenta, se pregunta por la conexión antes de realizarla.
+                        if (conexion){
+                            try {
+                                git.pull().setRemoteBranchName(StartUpActions.matricula).setCredentialsProvider(credentials).call();
+                            } catch (RefNotAdvertisedException a){
+                                System.out.println("Remote " + StartUpActions.matricula + " no existe.");
+                            } catch (GitAPIException ex){
+                                System.out.println("Error general con JGit");
+                            }
+                        }
+
+                        //Regresando contenido a origen.
+                        source = new File(workspaceFile.tempPath);
+                        dest = new File(workspaceFile.folderPath);
+                        try {
+                            FileUtils.copyDirectoryStructure(source, dest);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        //Borrando contenido temporal para evitar duplicados.
+                        try {
+                            FileUtils.deleteDirectory(workspaceFile.tempPath);
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
 
-                    //Regresando contenido a origen.
-                    source = new File(workspaceFile.tempPath);
-                    dest = new File(workspaceFile.folderPath);
-                    try {
-                        FileUtils.copyDirectoryStructure(source, dest);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+                    workspaceFile.readXML(project);
+                    CopyFilesFromType copyFiles = new CopyFilesFromType();
+                    Date dateobj = copyFiles.copy("py", project.getBasePath(), workspaceFile.projectPath);
 
-                    //Borrando contenido temporal para evitar duplicados.
-                    try {
-                        FileUtils.deleteDirectory(workspaceFile.tempPath);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-                workspaceFile.readXML(project);
-                CopyFilesFromType copyFiles = new CopyFilesFromType();
-                Date dateobj = copyFiles.copy("py", project.getBasePath(), workspaceFile.projectPath);
-
-                File log = new File(workspaceFile.logPath);
-                BufferedReader br = null;
-                FileWriter fw = null;
-                FileReader fr = null;
-                PrintWriter pw = null;
-
-                try {
-                    if(!log.exists()){
-                        log = new File(workspaceFile.logPath);
-                        log.createNewFile();
-
-                        fw = new FileWriter(workspaceFile.logPath, true);
-                        pw = new PrintWriter(fw);
-                        pw.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + "\n");
-                        pw.print("<output>" + "\n");
-                        pw.print("</output>");
-                        pw.close();
-                    }
-                } catch(IOException ex) {
-                    System.out.println("Error con manejo de archivos.");
-                }
-
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException ex){
-                    ex.printStackTrace();
-                }
-
-                try{
-                    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-                    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-                    Document doc = dBuilder.parse(workspaceFile.logPath);
-                    Element root = doc.getDocumentElement();
-                    Element eNewComponent = doc.createElement("log_project");
-                    eNewComponent.setAttribute("id", "" + copyFiles.df.format(dateobj));
-                    eNewComponent.setAttribute("date", "" + df.format(dateobj));
-                    eNewComponent.setAttribute("name_project", "" + project.getName());
-
-                    fr = new FileReader(project.getBasePath() + workspaceFile.consoleOutputPath);
-                    br = new BufferedReader(fr);
-
-                    String sCurrentLine;
-                    //Copiando contenido de output.txt a log.log.
-                    while ((sCurrentLine = br.readLine()) != null) {
-                        eNewComponent.appendChild(doc.createTextNode("" + sCurrentLine + "\n"));
-                    }
-
-                    root.appendChild(eNewComponent);
-                    //System.out.println(root);
-                    //System.out.println(eNewComponent);
-                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                    Transformer transformer = transformerFactory.newTransformer();
-                    //transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-                    //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                    DOMSource source = new DOMSource(doc);
-                    StreamResult result = new StreamResult(new File(workspaceFile.logPath));
-                    transformer.transform(source, result);
-                } catch (ParserConfigurationException | SAXException | TransformerException | IOException ex){
-                    ex.printStackTrace();
-                    System.out.println(ex.getMessage());
-                }
-
-                /*
-                try {
-
-                    //Thread.sleep(3000);
+                    File log = new File(workspaceFile.logPath);
                     BufferedReader br = null;
+                    FileWriter fw = null;
                     FileReader fr = null;
-                    FileWriter fileWriter;
-                    PrintWriter printWriter = null;
+                    PrintWriter pw = null;
 
-                    if (!log.exists()){
-                        log = new File(workspaceFile.logPath);
-                        log.createNewFile();
+                    try {
+                        if(!log.exists()){
+                            log = new File(workspaceFile.logPath);
+                            log.createNewFile();
 
-                        fileWriter = new FileWriter(workspaceFile.logPath, true);
-                        printWriter = new PrintWriter(fileWriter);
-                        printWriter.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + "\n");
-                        printWriter.print("<output>" + "\n");
-                        printWriter.print("</output>");
-                        printWriter.close();
+                            fw = new FileWriter(workspaceFile.logPath, true);
+                            pw = new PrintWriter(fw);
+                            pw.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + "\n");
+                            pw.print("<output>" + "\n");
+                            pw.print("</output>");
+                            pw.close();
+                        }
+                    } catch(IOException ex) {
+                        System.out.println("Error con manejo de archivos.");
+                    }
+
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException ex){
+                        ex.printStackTrace();
                     }
 
                     try{
@@ -237,15 +182,13 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                         fr = new FileReader(project.getBasePath() + workspaceFile.consoleOutputPath);
                         br = new BufferedReader(fr);
 
-                        String sCurrentLine;
                         //Copiando contenido de output.txt a log.log.
+                        String sCurrentLine;
                         while ((sCurrentLine = br.readLine()) != null) {
                             eNewComponent.appendChild(doc.createTextNode("" + sCurrentLine + "\n"));
                         }
-                        root.appendChild(eNewComponent);
-                        System.out.println(root);
-                        System.out.println(eNewComponent);
 
+                        root.appendChild(eNewComponent);
                         TransformerFactory transformerFactory = TransformerFactory.newInstance();
                         Transformer transformer = transformerFactory.newTransformer();
                         //transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
@@ -253,56 +196,46 @@ public class NewActionsForPlayButton extends AbstractProjectComponent {
                         DOMSource source = new DOMSource(doc);
                         StreamResult result = new StreamResult(new File(workspaceFile.logPath));
                         transformer.transform(source, result);
-                    } catch (ParserConfigurationException ex){
+                    } catch (ParserConfigurationException | SAXException | TransformerException | IOException ex){
                         ex.printStackTrace();
-                    } catch(SAXException sx){
-                        sx.printStackTrace();
-                    } catch(TransformerException ax) {
-                        ax.printStackTrace();
-                    } finally {
-                        fr.close();
-                        br.close();
+                        System.out.println(ex.getMessage());
                     }
 
-                } catch (IOException | InterruptedException | NullPointerException ex) {
-                    ex.printStackTrace();
-                    System.out.println("Error con manejo de archivos.");
-                }*/
+                    //Git 'checkout', git 'add', git 'commit'... No se realiza si no hay conexion.
+                    if (conexion){
+                        try {
+                            git.checkout().setName(StartUpActions.matricula).call();
+                            git.add().addFilepattern(".").call();
+                            git.commit().setMessage("Nuevo commit, fecha: " + dateobj.toString()).call();
+                        } catch (Exception ex){
+                            System.out.println("Referencia " + StartUpActions.matricula + " no existe en 'remote.'");
+                        }
 
-                //Git 'checkout', git 'add', git 'commit'... No se realiza si no hay conexion.
-                if (conexion){
-                    try {
-                        git.checkout().setName(StartUpActions.matricula).call();
-                        git.add().addFilepattern(".").call();
-                        git.commit().setMessage("Nuevo commit, fecha: " + dateobj.toString()).call();
-                    } catch (Exception ex){
-                        System.out.println("Referencia " + StartUpActions.matricula + " no existe en 'remote.'");
-                    }
+                        //Por si no existe en remote el branch, se debe de crear. En caso de existir, imprime el mensaje
+                        //correspondiente en consola.
+                        try {
+                            CreateBranchCommand bcc = git.branchCreate();
+                            bcc.setName(StartUpActions.matricula)
+                                    .setUpstreamMode(CreateBranchCommand.SetupUpstreamMode.SET_UPSTREAM)
+                                    .setStartPoint("origin/master")
+                                    .setForce(false)
+                                    .call();
+                        } catch(GitAPIException ex){
+                            //ex.printStackTrace();
+                            System.out.println("Trabajando en 'branch' existente.");
+                        }
 
-                    //Por si no existe en remote el branch, se debe de crear. En caso de existir, imprime el mensaje
-                    //correspondiente en consola.
-                    try {
-                        CreateBranchCommand bcc = git.branchCreate();
-                        bcc.setName(StartUpActions.matricula)
-                                .setUpstreamMode(CreateBranchCommand.SetupUpstreamMode.SET_UPSTREAM)
-                                .setStartPoint("origin/master")
-                                .setForce(false)
-                                .call();
-                    } catch(GitAPIException ex){
-                        //ex.printStackTrace();
-                        System.out.println("Trabajando en 'branch' existente.");
-                    }
-
-                    //'Push' a 'remote.'
-                    try {
-                        PushCommand pushCommand = git.push();
-                        pushCommand.setRemote("origin");
-                        pushCommand.setRefSpecs( new RefSpec(StartUpActions.matricula) );
-                        pushCommand.setCredentialsProvider(credentials);
-                        pushCommand.call();
-                        git.close();
-                    } catch (GitAPIException ex){
-                        ex.printStackTrace();
+                        //'Push' a 'remote.'
+                        try {
+                            PushCommand pushCommand = git.push();
+                            pushCommand.setRemote("origin");
+                            pushCommand.setRefSpecs( new RefSpec(StartUpActions.matricula) );
+                            pushCommand.setCredentialsProvider(credentials);
+                            pushCommand.call();
+                            git.close();
+                        } catch (GitAPIException ex){
+                            ex.printStackTrace();
+                        }
                     }
                 }
             }

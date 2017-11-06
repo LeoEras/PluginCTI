@@ -1,12 +1,8 @@
 package pluginPackage;
 
-import org.apache.commons.lang.ArrayUtils;
-
 import java.io.*;
-import java.net.NoRouteToHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 
 public class CopyFilesFromType
@@ -24,19 +20,35 @@ public class CopyFilesFromType
         filter = new FileTypeOrFolderFilter(fileType);
         File currentFolder = new File(fromPath);
         File outputFolder = new File(outputPath);
-        dateobj = new Date();
-        try {
-            dateobj = GlobalTime.getAtomicTime().getTime();
-        } catch(NoRouteToHostException nrthex) {
-            System.out.println("No hay conexión con el servidor para obtener el tiempo. Tomando hora local.");
-            dateobj = new Date();
-        } catch(IOException ex) {
-            System.out.println("Tomando hora local.");
-            dateobj = new Date();
-        }
-        scanFolder(fileType, currentFolder, outputFolder);
-        copyFilesFromFolders(fileType, currentFolder, outputFolder);
+        String projectPath = fromPath.substring(0, fromPath.indexOf(currentFolder.getName()));
+        dateobj = GlobalTime.getTimeFromServer();
+        copyFilesFromFolders(projectPath, currentFolder.getAbsolutePath(), fileType, outputFolder);
+        //scanFolder(fileType, currentFolder, outputFolder);
+        //copyFilesFromFolders(fileType, currentFolder, outputFolder);
         return dateobj;
+    }
+
+    public void copyFilesFromFolders( String projectPath, String path, String fileType, File outputFolder) {
+
+        File root = new File( path );
+        File[] list = root.listFiles();
+
+        if (list == null) return;
+
+        for ( File f : list ) {
+            if (!compareItems(f.getName(), foldersWithoutCopy)) {
+                if (f.isDirectory()) {
+                    copyFilesFromFolders(projectPath, f.getAbsolutePath(), fileType, outputFolder);
+                } else {
+                    if(f.getAbsoluteFile().getName().endsWith("." + fileType)) {
+                        String projectAbsolutePath = projectPath.toLowerCase().replace("_","").replace("\\","_").replace("/","_").replaceAll("[.:!?(){}\\\\-]","");
+                        String actualPath = f.getParent().toLowerCase().replace("_","").replace("\\","_").replace("/","_").replaceAll("[.:!?(){}\\\\-]","");
+                        String source = actualPath.replace(projectAbsolutePath,"");
+                        copy(f, source, outputFolder);
+                    }
+                }
+            }
+        }
     }
 
     public boolean compareItems(String a, String[] b) {
@@ -46,28 +58,6 @@ public class CopyFilesFromType
                 bandera = true;
         }
         return bandera;
-    }
-
-    private void copyFilesFromFolders(final String fileType, File currentFolder, File outputFolder) {
-        try{
-            String[] directories = currentFolder.list(new FilenameFilter() {
-                @Override
-                public boolean accept(File current, String name) {
-                    if(new File(current, name).isDirectory())
-                        return !compareItems(name, foldersWithoutCopy);
-                    else
-                        return false;
-                }
-            });
-            if (!ArrayUtils.isEmpty(directories)){
-                //System.out.println("directories:" +Arrays.toString(directories));
-                for (int j = 0; j < directories.length; j++) {
-                    scanFolder(fileType, new File(currentFolder, directories[j]), outputFolder);
-                }
-            }
-        }catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void scanFolder(final String fileType, File currentFolder, File outputFolder){

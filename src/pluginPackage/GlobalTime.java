@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.NoRouteToHostException;
 import java.net.Socket;
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,7 +37,7 @@ public final class GlobalTime {
                     break;
                 }
             }
-            System.out.println("DEBUG 1 : " + atomicTime);
+            //System.out.println("DEBUG 1 : " + atomicTime);
             String[] fields = atomicTime.split(" ");
             GregorianCalendar calendar = new GregorianCalendar();
 
@@ -50,7 +50,7 @@ public final class GlobalTime {
             // here i'm using "EST" for Eastern Standart Time (to support Daylight Saving Time)
             TimeZone tz = TimeZone.getTimeZone("EST"); // or .getDefault()
             int gmt = (tz.getRawOffset() + tz.getDSTSavings()) / 3600000;
-            System.out.println("DEBUG 2 : " + gmt);
+            //System.out.println("DEBUG 2 : " + gmt);
 
             String[] time = fields[2].split(":");
             calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time[0]) + gmt);
@@ -67,13 +67,44 @@ public final class GlobalTime {
         }
     }
 
-    public static void main(String args[]) throws IOException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+    public static Date getTimeFromServer(){
+        Date dateobj;
         try {
-            System.out.println("" + sdf.format(GlobalTime.getAtomicTime().getTime()));
-        } catch (NoRouteToHostException ex){
-            System.out.println("No hay conexión con el servidor para obtener el tiempo.");
+            dateobj = GlobalTime.getAtomicTime().getTime();
+        } catch(NoRouteToHostException nrthex) {
+            System.out.println("No hay conexión con el servidor para obtener el tiempo. Tomando hora local.");
+            dateobj = new Date();
+        } catch(Exception ex) {
+            System.out.println("Tomando hora local.");
+            dateobj = new Date();
         }
+        return dateobj;
+    }
+
+    public static boolean isWorkingTime(String startTime, String endTime){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        Date time = GlobalTime.getTimeFromServer();
+        Calendar c = Calendar.getInstance();
+        c.setTime(time);
+
+        if(c.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY){
+            try{
+                Date now = sdf.parse(sdf.format(time));
+                Date dstart = sdf.parse(startTime);
+                Date dend = sdf.parse(endTime);
+                if(now.compareTo(dstart) > 0 && now.compareTo(dend) < 0){
+                    return true;
+                }
+            } catch (ParseException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return false;
+    }
+
+    public static void main(String args[]) throws IOException {
+        System.out.println(isWorkingTime("10:15:00", "12:45:00"));
     }
 
 
