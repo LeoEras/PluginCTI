@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f85484e1-1154-4b64-a41c-315113a9fb8b" name="Default" comment="Agregado soporte para linux">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PluginCTICOM2.zip" afterPath="$PROJECT_DIR$/PluginCTICOM2.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PluginCTILPU2.zip" afterPath="$PROJECT_DIR$/PluginCTILPU2.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/ConfigureSettings.class" afterPath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/ConfigureSettings.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/plexus_utils_1_5_12.xml" afterPath="$PROJECT_DIR$/.idea/libraries/plexus_utils_1_5_12.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/NewActionsForPlayButton.class" afterPath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/NewActionsForPlayButton.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pluginPackage/CopyFilesFromType.java" afterPath="$PROJECT_DIR$/src/pluginPackage/CopyFilesFromType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pluginPackage/NewActionsForPlayButton.java" afterPath="$PROJECT_DIR$/src/pluginPackage/NewActionsForPlayButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/NewActionsForPlayButton$1.class" afterPath="$PROJECT_DIR$/out/production/PluginCTI/pluginPackage/NewActionsForPlayButton$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PluginCTI.iml" afterPath="$PROJECT_DIR$/PluginCTI.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PluginCTI/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/out/production/PluginCTI/META-INF/plugin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/resources/META-INF/plugin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pluginPackage/ConfigureSettings.java" afterPath="$PROJECT_DIR$/src/pluginPackage/ConfigureSettings.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,8 +29,8 @@
       <file leaf-file-name="plugin.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-51">
-              <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+            <state relative-caret-position="238">
+              <caret line="14" column="56" lean-forward="false" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -35,8 +39,8 @@
       <file leaf-file-name="StartUpActions.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pluginPackage/StartUpActions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="33" column="66" lean-forward="false" selection-start-line="33" selection-start-column="66" selection-end-line="33" selection-end-column="66" />
+            <state relative-caret-position="-1377">
+              <caret line="39" column="64" lean-forward="false" selection-start-line="39" selection-start-column="64" selection-end-line="39" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -47,45 +51,32 @@
       <file leaf-file-name="NewActionsForPlayButton.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pluginPackage/NewActionsForPlayButton.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="43" column="74" lean-forward="false" selection-start-line="43" selection-start-column="74" selection-end-line="43" selection-end-column="74" />
+            <state relative-caret-position="51">
+              <caret line="43" column="65" lean-forward="false" selection-start-line="43" selection-start-column="65" selection-end-line="43" selection-end-column="65" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1802#12590#0" expanded="true" />
+                <element signature="e#12589#12590#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GlobalTime.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GlobalTime.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pluginPackage/GlobalTime.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="92" column="34" lean-forward="true" selection-start-line="92" selection-start-column="34" selection-end-line="92" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CopyFilesFromType.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pluginPackage/CopyFilesFromType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="39" column="38" lean-forward="false" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="38" />
+            <state relative-caret-position="90">
+              <caret line="87" column="24" lean-forward="true" selection-start-line="87" selection-start-column="24" selection-end-line="87" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConfigureSettings.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pluginPackage/ConfigureSettings.java">
+      <file leaf-file-name="CopyFilesFromType.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pluginPackage/CopyFilesFromType.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="107" column="49" lean-forward="false" selection-start-line="107" selection-start-column="49" selection-end-line="107" selection-end-column="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <caret line="28" column="5" lean-forward="false" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -101,7 +92,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Application</find>
       <find>execution</find>
       <find>console</find>
       <find>runneractions</find>
@@ -131,6 +121,7 @@
       <find>xml</find>
       <find>date</find>
       <find>df</find>
+      <find>System</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -171,11 +162,11 @@
         <option value="$PROJECT_DIR$/src/pluginPackage/UpdateWorkspaceFile.java" />
         <option value="$USER_HOME$/Downloads/org.eclipse.jgit-4.9.0.201710071750-r.jar!/org/eclipse/jgit/api/Git.class" />
         <option value="$PROJECT_DIR$/src/pluginPackage/SizeFilter.java" />
-        <option value="$PROJECT_DIR$/src/pluginPackage/ConfigureSettings.java" />
         <option value="$PROJECT_DIR$/src/pluginPackage/CopyFilesFromType.java" />
-        <option value="$PROJECT_DIR$/resources/META-INF/plugin.xml" />
-        <option value="$PROJECT_DIR$/src/pluginPackage/StartUpActions.java" />
         <option value="$PROJECT_DIR$/src/pluginPackage/NewActionsForPlayButton.java" />
+        <option value="$PROJECT_DIR$/src/pluginPackage/StartUpActions.java" />
+        <option value="$PROJECT_DIR$/src/pluginPackage/ConfigureSettings.java" />
+        <option value="$PROJECT_DIR$/resources/META-INF/plugin.xml" />
         <option value="$PROJECT_DIR$/src/pluginPackage/GlobalTime.java" />
       </list>
     </option>
@@ -227,8 +218,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -238,38 +227,24 @@
             </path>
             <path>
               <item name="PluginCTI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PluginCTI" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PluginCTI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PluginCTI" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PluginCTI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PluginCTI" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pluginPackage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PluginCTI" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/plexus-utils-1.5.12.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/org.eclipse.jgit-4.9.0.201710071750-r.jar!/" />
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
@@ -296,14 +271,14 @@
     </option>
   </component>
   <component name="RunManager" selected="Plugin.Plugin">
-    <configuration name="CopyFilesFromType" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="ConfigureSettings" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="pluginPackage.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="pluginPackage.CopyFilesFromType" />
+      <option name="MAIN_CLASS_NAME" value="pluginPackage.ConfigureSettings" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -312,7 +287,7 @@
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="New" />
+      <module name="PluginCTI" />
       <envs />
     </configuration>
     <configuration name="CustomDialog" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -493,19 +468,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Plugin.Plugin" />
-      <item index="1" class="java.lang.String" itemvalue="Application.CopyFilesFromType" />
-      <item index="2" class="java.lang.String" itemvalue="Application.klass" />
-      <item index="3" class="java.lang.String" itemvalue="Application.CustomDialog" />
-      <item index="4" class="java.lang.String" itemvalue="Application.SizeFilter" />
-      <item index="5" class="java.lang.String" itemvalue="Application.GlobalTime" />
+      <item index="1" class="java.lang.String" itemvalue="Application.klass" />
+      <item index="2" class="java.lang.String" itemvalue="Application.CustomDialog" />
+      <item index="3" class="java.lang.String" itemvalue="Application.SizeFilter" />
+      <item index="4" class="java.lang.String" itemvalue="Application.GlobalTime" />
+      <item index="5" class="java.lang.String" itemvalue="Application.ConfigureSettings" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.GlobalTime" />
-        <item index="1" class="java.lang.String" itemvalue="Application.SizeFilter" />
-        <item index="2" class="java.lang.String" itemvalue="Application.CustomDialog" />
-        <item index="3" class="java.lang.String" itemvalue="Application.klass" />
-        <item index="4" class="java.lang.String" itemvalue="Application.CopyFilesFromType" />
+        <item index="0" class="java.lang.String" itemvalue="Application.ConfigureSettings" />
+        <item index="1" class="java.lang.String" itemvalue="Application.GlobalTime" />
+        <item index="2" class="java.lang.String" itemvalue="Application.SizeFilter" />
+        <item index="3" class="java.lang.String" itemvalue="Application.CustomDialog" />
+        <item index="4" class="java.lang.String" itemvalue="Application.klass" />
       </list>
     </recent_temporary>
   </component>
@@ -576,34 +551,33 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32520324" sideWeight="0.47360703" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32492113" sideWeight="0.47360703" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29652998" sideWeight="0.41434845" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29623568" sideWeight="0.5856515" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2949527" sideWeight="0.5856515" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1301059" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32405892" sideWeight="0.4941435" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1295754" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39937106" sideWeight="0.4941435" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39905363" sideWeight="0.4941435" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32405892" sideWeight="0.4941435" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -741,13 +715,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/examplePackage/Mainclass.java" />
     <entry file="file://$PROJECT_DIR$/src/pluginPackage/OnFileSaveComponent.java" />
-    <entry file="file://$PROJECT_DIR$/PluginCTI.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pluginPackage/TestJGit.java" />
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/execution/ExecutionManager.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -780,56 +747,12 @@
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/Calendar.java" />
-    <entry file="file://$PROJECT_DIR$/src/pluginPackage/ConfigureSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="107" column="49" lean-forward="false" selection-start-line="107" selection-start-column="49" selection-end-line="107" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/Date.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="975" column="15" lean-forward="false" selection-start-line="975" selection-start-column="15" selection-end-line="975" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/Calendar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1248">
-          <caret line="840" column="31" lean-forward="true" selection-start-line="840" selection-start-column="31" selection-end-line="840" selection-end-column="31" />
-          <folding>
-            <element signature="e#73319#73320#0" expanded="false" />
-            <element signature="e#73355#73356#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pluginPackage/CopyFilesFromType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="39" column="38" lean-forward="false" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/Date.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/Calendar.java" />
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/maven-aether-provider-3.3.9-all.jar!/org/codehaus/plexus/util/FileUtils.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -841,33 +764,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pluginPackage/StartUpActions.java">
+    <entry file="file://$PROJECT_DIR$/PluginCTI.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="33" column="66" lean-forward="false" selection-start-line="33" selection-start-column="66" selection-end-line="33" selection-end-column="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pluginPackage/NewActionsForPlayButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="43" column="74" lean-forward="false" selection-start-line="43" selection-start-column="74" selection-end-line="43" selection-end-column="74" />
+        <state relative-caret-position="51">
+          <caret line="43" column="65" lean-forward="false" selection-start-line="43" selection-start-column="65" selection-end-line="43" selection-end-column="65" />
+          <folding>
+            <element signature="e#1802#12590#0" expanded="true" />
+            <element signature="e#12589#12590#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pluginPackage/StartUpActions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1377">
+          <caret line="39" column="64" lean-forward="false" selection-start-line="39" selection-start-column="64" selection-end-line="39" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pluginPackage/GlobalTime.java">
+    <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="92" column="34" lean-forward="true" selection-start-line="92" selection-start-column="34" selection-end-line="92" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="14" column="56" lean-forward="false" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pluginPackage/GlobalTime.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="87" column="24" lean-forward="true" selection-start-line="87" selection-start-column="24" selection-end-line="87" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pluginPackage/ConfigureSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="39" lean-forward="true" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pluginPackage/CopyFilesFromType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="28" column="5" lean-forward="false" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>

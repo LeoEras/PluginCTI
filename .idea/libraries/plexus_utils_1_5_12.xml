@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="plexus-utils-1.5.12">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/plexus-utils-1.5.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/plexus-utils-1.5.12.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -109,6 +109,7 @@ public class ConfigureSettings {
             //System.out.println("\nRoot element :" + doc.getDocumentElement().getNodeName());
             NodeList nList = doc.getElementsByTagName("component");
             //System.out.println("----------------------------");
+
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
                 //System.out.println("\nCurrent Element :" + nNode.getNodeName());
@@ -119,43 +120,46 @@ public class ConfigureSettings {
                     if(nameComponent.equalsIgnoreCase("RunManager")) {
                         findNode = true;
                         NodeList nListConfig = eElement.getElementsByTagName("configuration");
-                        Node nNodeConfig = nListConfig.item(0);
-                        //System.out.println("\nCurrent Element :" + nNodeConfig.getNodeName());
-                        if (nNodeConfig.getNodeType() == Node.ELEMENT_NODE) {
-                            Element eOutputFile = (Element) nNodeConfig;
-                            //System.out.println("Length Element Tag:" + eOutputFile.getElementsByTagName("output_file").getLength());
-                            if(eOutputFile.getElementsByTagName("output_file").getLength() != 0) {
-                                NodeList nOutputFile = eOutputFile.getElementsByTagName("output_file");
-                                //System.out.println("Update Element :" + nOutputFile.getLength());
-                                Node nNodeOutput = nOutputFile.item(0);
-                                Element eNewOutputFile = (Element) nNodeOutput;
-                                eNewOutputFile.setAttribute("path", "$PROJECT_DIR$/.idea/" + consoleOutputFile);
-                                eNewOutputFile.setAttribute("is_save", "true");
+                        for (int item = 0; item < nListConfig.getLength(); item++){
+                            Node nNodeConfig = nListConfig.item(item);
+                            //System.out.println("\nCurrent Element :" + nNodeConfig.getNodeName());
+                            if (nNodeConfig.getNodeType() == Node.ELEMENT_NODE) {
+                                Element eOutputFile = (Element) nNodeConfig;
+                                //System.out.println("Length Element Tag:" + eOutputFile.getElementsByTagName("output_file").getLength());
+                                if(eOutputFile.getElementsByTagName("output_file").getLength() != 0) {
+                                    NodeList nOutputFile = eOutputFile.getElementsByTagName("output_file");
+                                    //System.out.println("Update Element :" + nOutputFile.getLength());
+                                    Node nNodeOutput = nOutputFile.item(0);
+                                    Element eNewOutputFile = (Element) nNodeOutput;
+                                    eNewOutputFile.setAttribute("path", "$PROJECT_DIR$/.idea/" + consoleOutputFile);
+                                    eNewOutputFile.setAttribute("is_save", "true");
+                                }
+                                else{
+                                    Element eNewOutputFile = doc.createElement("output_file");
+                                    eNewOutputFile.setAttribute("path", "$PROJECT_DIR$/.idea/" + consoleOutputFile);
+                                    eNewOutputFile.setAttribute("is_save", "true");
+                                    //System.out.println("Create Element output_file");
+                                    nNodeConfig.insertBefore(eNewOutputFile, nNodeConfig.getFirstChild());
+                                }
                             }
-                            else{
+                            else {
+                                //crear el nodo
+                                //System.out.println("Crear nodo configuration");
+                                Element eNewConfiguration = doc.createElement("configuration");
+                                doc.appendChild(eNewConfiguration);
                                 Element eNewOutputFile = doc.createElement("output_file");
                                 eNewOutputFile.setAttribute("path", "$PROJECT_DIR$/.idea/" + consoleOutputFile);
                                 eNewOutputFile.setAttribute("is_save", "true");
-                                //System.out.println("Create Element output_file");
-                                nNodeConfig.insertBefore(eNewOutputFile, nNodeConfig.getFirstChild());
+                                eNewConfiguration.appendChild(eNewOutputFile);
                             }
                         }
-                        else {
-                            //crear el nodo
-                            //System.out.println("Crear nodo configuration");
-                            Element eNewConfiguration = doc.createElement("configuration");
-                            doc.appendChild(eNewConfiguration);
-                            Element eNewOutputFile = doc.createElement("output_file");
-                            eNewOutputFile.setAttribute("path", "$PROJECT_DIR$/.idea/" + consoleOutputFile);
-                            eNewOutputFile.setAttribute("is_save", "true");
-                            eNewConfiguration.appendChild(eNewOutputFile);
-                        }
+
 
                     }
                 }
             }
             //System.out.println("\nVariable:" + findNode);
-            if(findNode.equals(false)){
+            /*if(findNode.equals(false)){
                 //crear el nodo
                 NodeList nProject = doc.getElementsByTagName("project");
                 Node nNodeProject = nProject.item(0);
@@ -172,7 +176,7 @@ public class ConfigureSettings {
                     eNewOutputFile.setAttribute("is_save", "true");
                     eNewConfiguration.appendChild(eNewOutputFile);
                 }
-            }
+            }*/
 
             // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -198,7 +202,7 @@ public class ConfigureSettings {
     public void setAttributeOutputElement(Element eNewOutputFile){
         eNewOutputFile.setAttribute("path", "$PROJECT_DIR$/.idea/" + consoleOutputFile);
         eNewOutputFile.setAttribute("is_save", "true");
-        System.out.println("Path: " + eNewOutputFile.getAttribute("path"));
+        //System.out.println("Path: " + eNewOutputFile.getAttribute("path"));
     }
 
     public static void main(String argv[]) {

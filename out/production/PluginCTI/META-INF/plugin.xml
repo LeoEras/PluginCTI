@@ -1,25 +1,19 @@
 <idea-plugin>
   <id>com.cti.ide.intellij</id>
   <name>Plugin CTI</name>
-  <version>1.6.12</version>
-  <vendor url="leonardo.eras@cti.espol.edu.ec">Leonardo Eras</vendor>
+  <version>1.6.14</version>
+  <vendor email="leonardo.eras@cti.espol.edu.ec">Leonardo Eras</vendor>
 
   <description>
-      <!--
       <![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+      Data logger para curso de Fundamentos de Programación.
     ]]>
-    -->
     </description>
 
   <change-notes>
-      <!--
       <![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      <span>*</span> Soporte para Linux habilitado.</br>
     ]]>
-      -->
   </change-notes>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
